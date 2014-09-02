@@ -1,0 +1,19 @@
+<% var test = 'test' %>
+<div class="table-cntr">
+    <h2><%=title%></h2>
+    <table class="table table-striped">
+        <thead>
+        <tr><th>Index</th><th>Name</th><th>Value</th></tr>
+        </thead>
+        <tbody>
+        <%_.each(rows, function(r, i){ %>
+        <tr>
+            <td><%=i+1%></td>
+            <td><%=test + r.title%></td>
+            <td><%=r.value%></td>
+        </tr>
+        <%})%>
+        </tbody>
+        <tfoot></tfoot>
+    </table>
+</div>
