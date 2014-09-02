@@ -20,6 +20,7 @@
 <script type="text/javascript" src="js/ven/jquery.js"></script>
 <script type="text/javascript" src="js/ven/lodash.js"></script>
 <script type="text/javascript" src="js/ven/bootstrap.js"></script>
+<script type="text/javascript" src="js/templates.js"></script>
 
 
 
@@ -36,7 +37,7 @@
 
         var txt = $("#mytable").html();
 
-        var tmplText = _.template(txt, model);
+        var tmplText = tmpl.mytable(model);
 
         $(".page-body").append(tmplText);
     });

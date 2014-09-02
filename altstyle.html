@@ -1,0 +1,68 @@
+<!-- This sample show how to use an alternate parameter style -->
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
+    <link href="./css/bootstrap-theme.min.css" rel="stylesheet">
+</head>
+<body class="container">
+<div class="page-header">
+    <h1>Templating Model Sample</h1>
+</div>
+<div class="page-body">
+
+</div>
+
+<div class="page-footer">
+
+</div>
+<script type="text/javascript" src="js/ven/jquery.js"></script>
+<script type="text/javascript" src="js/ven/lodash.js"></script>
+<script type="text/javascript" src="js/ven/bootstrap.js"></script>
+
+<script id="myform" type="text/x-lodash-template" >
+    <div class="table-cntr">
+        <h2>{{title}}</h2>
+        <div class="form form-horizontal">
+            <div class="form-group">
+                <label>Title</label>
+                <input type="text" class="form-control" value="{{title}}" />
+            </div>
+            <div class="form-group">
+                <label>Value</label>
+                <input type="text" class="form-control" value="{{value}}" />
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" class="form-control" value="{{value}}" />
+            </div>
+        </div>
+    </div>
+</script>
+
+<script type="text/javascript">
+    $(function(){
+        _.templateSettings = {
+            'interpolate': /{{([\s\S]+?)}}/g
+        };
+
+        var model = {
+            title:'test 123',
+            value:'test value',
+            password:'keep it secret'
+        };
+
+        var txt = $("#myform").html();
+
+        var tmplText = _.template(txt, model);
+
+        $(".page-body").append(tmplText);
+    });
+</script>
+
+
+</body>
+</html>

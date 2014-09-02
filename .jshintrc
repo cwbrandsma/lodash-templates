@@ -1,0 +1,12 @@
+{
+	"passfail": false,
+	"browser":true,
+	"jquery":true,
+	"laxcomma":true,
+	"nonew":true,
+	"shadow":true,
+	"loopfunc":true,
+	"eqnull":true,
+	"predef":["_","console"],
+	"globals":"_,console"
+}

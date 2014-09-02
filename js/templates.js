@@ -1,0 +1,5 @@
+this["tmpl"] = this["tmpl"] || {};
+
+this["tmpl"]["myrow"] = function(obj) {obj || (obj = {});var __t, __p = '', __e = _.escape;with (obj) {__p += '<tr><td>test123</td></tr>';}return __p};
+
+this["tmpl"]["mytable"] = function(obj) {obj || (obj = {});var __t, __p = '', __e = _.escape, __j = Array.prototype.join;function print() { __p += __j.call(arguments, '') }with (obj) { var test = 'test' ;__p += '\n<div class="table-cntr">\n<h2>' +((__t = (title)) == null ? '' : __t) +'</h2>\n<table class="table table-striped">\n<thead>\n<tr><th>Index</th><th>Name</th><th>Value</th></tr>\n</thead>\n<tbody>\n';_.each(rows, function(r, i){ ;__p += '\n<tr>\n<td>' +((__t = (i+1)) == null ? '' : __t) +'</td>\n<td>' +((__t = (test + r.title)) == null ? '' : __t) +'</td>\n<td>' +((__t = (r.value)) == null ? '' : __t) +'</td>\n</tr>\n';});__p += '\n</tbody>\n<tfoot></tfoot>\n</table>\n</div>';}return __p};
