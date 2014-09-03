@@ -80,5 +80,7 @@ module.exports = function(grunt) {
     // build javascript documentation
     grunt.registerTask('docs', ['clean:docs','jsdoc']);
 
+    grunt.registerTask('prod', ['uglify']);
+
     grunt.registerTask('reset', ['clean:reset'])
 };

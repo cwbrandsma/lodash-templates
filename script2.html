@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
+    <link href="./css/bootstrap-theme.min.css" rel="stylesheet">
+</head>
+<body class="container">
+<div class="page-header">
+    <h1>Templating Script Performance Sample</h1>
+    <div class="page-timer"></div>
+</div>
+<div class="page-body">
+
+</div>
+
+<div class="page-footer">
+
+</div>
+<script type="text/javascript" src="js/ven/jquery.js"></script>
+<script type="text/javascript" src="js/ven/lodash.js"></script>
+<script type="text/javascript" src="js/ven/bootstrap.js"></script>
+
+
+<script id="mytable1" type="text/x-lodash-template" >
+    <% var test = 'test' %>
+    <div class="table-cntr">
+        <h2><%=title%></h2>
+        <table class="table table-striped">
+            <thead>
+            <tr><th>Index</th><th>Name</th><th>Value</th></tr>
+            </thead>
+            <tbody>
+            <%_.each(rows, function(r, i){ %>
+            <tr>
+                <td><%=i+1%></td>
+                <td><%=test + r.title%></td>
+                <td><%=r.value%></td>
+            </tr>
+            <%})%>
+            </tbody>
+            <tfoot></tfoot>
+        </table>
+    </div>
+</script>
+
+<script id="mytable2" type="text/x-lodash-template" >
+    <% var test = 'test' %>
+    <div class="table-cntr">
+        <h2><%=title%></h2>
+        <table class="table table-striped">
+            <thead>
+            <tr><th>Index</th><th>Name</th><th>Value</th></tr>
+            </thead>
+            <tbody>
+            </tbody>
+            <tfoot></tfoot>
+        </table>
+    </div>
+</script>
+
+<script id="myrow" type="text/x-lodash-template" >
+    <tr>
+        <td><%=index+1%></td>
+        <td><%=title%></td>
+        <td><%=value%></td>
+    </tr>
+</script>
+
+<script type="text/javascript">
+    $(function(){
+        var model = {
+            title:'test 123',
+            rows:[ ]
+        };
+
+        for(var i=0;i<1000;i++){
+            model.rows.push({index:i, title:'Row '+i, value:i});
+        }
+        var startTime = new Date();
+        render1(model);
+
+        var doneTime = new Date();
+        var loadTime = (doneTime - startTime) / 1000;
+
+        $(".page-timer").html('load time ='+loadTime);
+
+    });
+
+    function render1(model){
+        var txt = $("#mytable1").html();
+
+        var tmplText = _.template(txt, model);
+
+        $(".page-body").append(tmplText);
+    }
+
+    function render2(model){
+        var tbltxt = $("#mytable2").html();
+        var rowtxt = $("#myrow").html();
+
+        var tmplText = $(_.template(tbltxt, model));
+        var bdyElem = tmplText.find('tbody');
+
+        var rowFunc = _.template(rowtxt);
+        _.each(model.rows, function(r){
+            var rowtxt = rowFunc(r);
+            bdyElem.append(rowtxt)
+        });
+        $(".page-body").append(tmplText);
+    }
+
+    function render3(model){
+        var tbltxt = $("#mytable2").html();
+        var rowtxt = $("#myrow").html();
+
+        var tmplText = $(_.template(tbltxt, model));
+        var bdyElem = tmplText.find('tbody');
+        $(".page-body").append(tmplText);
+
+        var rowFunc = _.template(rowtxt);
+        _.each(model.rows, function(r){
+            var rowtxt = rowFunc(r);
+            bdyElem.append(rowtxt)
+        });
+
+    }
+
+</script>
+
+
+</body>
+</html>
