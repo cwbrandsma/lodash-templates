@@ -79,7 +79,7 @@
             model.rows.push({index:i, title:'Row '+i, value:i});
         }
         var startTime = new Date();
-        render1(model);
+        render2(model);
 
         var doneTime = new Date();
         var loadTime = (doneTime - startTime) / 1000;
@@ -88,6 +88,7 @@
 
     });
 
+    // best performance sample
     function render1(model){
         var txt = $("#mytable1").html();
 
@@ -96,6 +97,7 @@
         $(".page-body").append(tmplText);
     }
 
+    // should be good, rendering each row individually
     function render2(model){
         var tbltxt = $("#mytable2").html();
         var rowtxt = $("#myrow").html();
@@ -111,6 +113,7 @@
         $(".page-body").append(tmplText);
     }
 
+    // not great sample
     function render3(model){
         var tbltxt = $("#mytable2").html();
         var rowtxt = $("#myrow").html();
@@ -124,7 +127,20 @@
             var rowtxt = rowFunc(r);
             bdyElem.append(rowtxt)
         });
+    }
 
+    // worst case sample
+    function render4(model){
+        var tbltxt = $("#mytable2").html();
+
+        var tmplText = $(_.template(tbltxt, model));
+        $(".page-body").append(tmplText);
+        var bdyElem = tmplText.find('tbody');
+
+        _.each(model.rows, function(r){
+            var rowtxt = _.template($("#myrow").html(),r);
+            bdyElem.append(rowtxt)
+        });
     }
 
 </script>
