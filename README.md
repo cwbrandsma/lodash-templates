@@ -7,4 +7,5 @@ Examples using Lodash (and Underscore) Template function
 * *model.html*  -- Shows how to pass a model object to a template
 * *script.html* -- Shows how to add execute javascript inside of a template
 * *compiled.html* -- Shows how to use a compiled template (requires gruntjs)
+* *perf.html* -- Shows various performance tests 
 

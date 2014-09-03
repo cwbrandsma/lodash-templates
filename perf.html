@@ -79,7 +79,11 @@
             model.rows.push({index:i, title:'Row '+i, value:i});
         }
         var startTime = new Date();
-        render2(model);
+        render1(model);
+//        render2(model);
+//        render3(model);
+//        render4(model);
+//        render5(model);
 
         var doneTime = new Date();
         var loadTime = (doneTime - startTime) / 1000;
@@ -141,6 +145,23 @@
             var rowtxt = _.template($("#myrow").html(),r);
             bdyElem.append(rowtxt)
         });
+    }
+
+    // jquery example
+    function render5(model){
+        var tbltxt = $("#mytable2").html();
+
+        var tmplText = $(_.template(tbltxt, model));
+        var bdyElem = tmplText.find('tbody');
+
+        _.each(model.rows, function(r){
+            var tr = $("<tr></tr>");
+            $("<td>"+ r.index+1+"</td>").appendTo(tr);
+            $("<td>"+ r.title+"</td>").appendTo(tr);
+            $("<td>"+ r.value+"</td>").appendTo(tr);
+            bdyElem.append(tr)
+        });
+        $(".page-body").append(tmplText);
     }
 
 </script>
